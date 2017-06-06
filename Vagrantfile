@@ -3,14 +3,14 @@
 
 boxes = [
   {
-    :name => "brasil",
+    :name => "master",
     :box => "centos/7",
     :ip => '10.0.0.11',
     :cpu => "50",
     :ram => "256"
   },
   {
-    :name => "argentina",
+    :name => "server1",
     :box => "centos/7",
     :ip => '10.0.0.12',
     :cpu => "50",
@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--memory", box[:ram]]
       end
       vms.vm.network :private_network, ip: box[:ip]
+      vms.vm.provision :shell, path: "bootstrap.sh"
     end
   end
   # The most common configuration options are documented and commented below.
